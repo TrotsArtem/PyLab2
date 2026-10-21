@@ -5,29 +5,35 @@ import re
 def task1():
     print("Завдання 1")
 
-    a = float(input("Введіть значення a (a != 0): "))
+    a = float(input("Введіть значення a (не дорівнює 0): "))
     while a == 0:
         print("Значення 'a' не може дорівнювати 0")
-        a = float(input("Введіть значення a (a != 0): "))
+        a = float(input("Введіть значення a: "))
 
-    eps = float(input("Введіть точність epsilon: "))
+    eps = float(input("Введіть точність epsilon (>0): "))
     while eps <= 0:
         print("Epsilon має бути більше 0")
         eps = float(input("Введіть точність epsilon: "))
 
-    total_sum = 0.0
-    k = 1
-    count = 0
+    N = 1
 
     while True:
-        term = math.exp(-k) / (a ** (2 * k) + math.factorial(k))
+        sum_N = 0.0
+        for k in range(1, N + 1):
+            term = math.exp(-k) / ((a ** (2 * k)) + math.factorial(k))
+            sum_N += term
 
-        if term < eps:
+        sum_2N = sum_N
+        for k in range(N + 1, 2 * N + 1):
+            term = math.exp(-k) / ((a ** (2 * k)) + math.factorial(k))
+            sum_2N += term
+
+        if abs(sum_2N - sum_N) < eps:
+            total_sum = sum_2N
+            count = 2 * N
             break
 
-        total_sum += term
-        count += 1
-        k += 1
+        N *= 2
 
     print(f"Сума: {total_sum}")
     print(f"Кількість врахованих доданків: {count}\n")
@@ -35,7 +41,7 @@ def task1():
 
 def task2():
     print("Завдання 2")
-    x = float(input("Введіть x (x != 0): "))
+    x = float(input("Введіть x: "))
     eps = float(input("Введіть точність epsilon: "))
 
     a_prev = x
