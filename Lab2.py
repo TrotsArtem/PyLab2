@@ -7,33 +7,33 @@ def task1():
 
     a = float(input("Введіть значення a (не дорівнює 0): "))
     while a == 0:
-        print("Значення 'a' не може дорівнювати 0")
+        print("Значення a не може дорівнювати 0")
         a = float(input("Введіть значення a: "))
 
     eps = float(input("Введіть точність epsilon (>0): "))
     while eps <= 0:
-        print("Epsilon має бути більше 0")
+        print("e psilon має бути більше 0")
         eps = float(input("Введіть точність epsilon: "))
 
-    N = 1
+    n = 1
 
     while True:
-        sum_N = 0.0
-        for k in range(1, N + 1):
+        sum_n = 0.0
+        for k in range(1, n + 1):
             term = math.exp(-k) / ((a ** (2 * k)) + math.factorial(k))
-            sum_N += term
+            sum_n += term
 
-        sum_2N = sum_N
-        for k in range(N + 1, 2 * N + 1):
+        sum_2n = sum_n
+        for k in range(n + 1, 2 * n + 1):
             term = math.exp(-k) / ((a ** (2 * k)) + math.factorial(k))
-            sum_2N += term
+            sum_2n += term
 
-        if abs(sum_2N - sum_N) < eps:
-            total_sum = sum_2N
-            count = 2 * N
+        if abs(sum_2n - sum_n) < eps:
+            total_sum = sum_2n
+            count = 2 * n
             break
 
-        N *= 2
+        n *= 2
 
     print(f"Сума: {total_sum}")
     print(f"Кількість врахованих доданків: {count}\n")
@@ -63,16 +63,27 @@ def task2():
 
 
 def task3():
-    print("Завдання 3")
-    text = input("Введіть текст: ")
-    word1 = input("Введіть слово, яке треба замінити: ")
-    word2 = input("Введіть нове слово: ")
+  print("Завдання 3")
+  text = input("Введіть текст: ")
+  word1 = input("Введіть слово, яке треба замінити: ")
+  word2 = input("Введіть нове слово: ")
 
-    pattern = r'\b' + re.escape(word1) + r'\b'
-    result_text = re.sub(pattern, word2, text)
+  words = text.split(" ")
+  updated_words = []
 
-    print("Результат:")
-    print(result_text, "\n")
+  for w in words:
+    clean_word = w.strip(".,!?\"'():;")
+
+    if clean_word == word1:
+      updated_word = w.replace(word1, word2)
+      updated_words.append(updated_word)
+    else:
+      updated_words.append(w)
+
+  result_text = " ".join(updated_words)
+
+  print("Результат:")
+  print(result_text, "\n")
 
 
 def sum_of_digits(n):
@@ -95,11 +106,11 @@ def task4():
 def main_menu():
     while True:
         print("\nГОЛОВНЕ МЕНЮ")
-        print("1 - Завдання 1")
-        print("2 - Завдання 2")
-        print("3 - Завдання 3")
-        print("4 - Завдання 4")
-        print("0 - Вихід")
+        print("1 Завдання")
+        print("2 Завдання")
+        print("3 Завдання")
+        print("4 Завдання")
+        print("0 Вихід")
 
         choice = input("Виберіть дію: ")
 
